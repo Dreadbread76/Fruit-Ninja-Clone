@@ -798,7 +798,8 @@ MonoBehaviour:
   veggieAmountMax: 12
   veggieAmount: 0
   veggieCount: 0
-  waveDelay: 3
+  smallWaveDelay: 3
+  largeWaveDelay: 4
   endWaveMin: 5
   endWaveMax: 7
   endWave: 0

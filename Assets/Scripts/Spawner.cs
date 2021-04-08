@@ -56,21 +56,20 @@ public class Spawner : MonoBehaviour
         veggieCount = 0;
         int waveType = Random.Range(0, 2);
 
-        if(waveType == 0)
+        StartCoroutine(Wave(waveType));
+        if (waveType == 0)
         {
-            waveTypeText.text = "Together";
-            StartCoroutine(TogetherWave());
+            waveTypeText.text = "Steggered";
         }
         else
         {
-            waveTypeText.text = "Staggered";
-            StartCoroutine(StaggeredWave());
+            waveTypeText.text = "Together";
         }
 
         yield return null;
         
     }
-    IEnumerator StaggeredWave()
+    IEnumerator Wave(int waveType)
     {
         Debug.Log("Wave Started");
        
@@ -84,8 +83,12 @@ public class Spawner : MonoBehaviour
            
             Instantiate(currentVeggie, throwX, Quaternion.identity);
 
-
-            yield return new WaitForSeconds(spawnDelay);
+            if(waveType == 0)
+            {
+                yield return new WaitForSeconds(spawnDelay);
+            }
+            
+            
             veggieCount++;
         }
 
@@ -95,34 +98,6 @@ public class Spawner : MonoBehaviour
         
 
     }
-    IEnumerator TogetherWave()
-    {
-        Debug.Log("Wave Started");
-        
-        veggieAmount = Random.Range(veggieAmountMin, veggieAmountMax);
+    
 
-        List<GameObject> veggieRoster = new List<GameObject>();
-
-        /*  foreach(GameObject veg in veggieRoster)
-          {
-              veg = Veggies[Random.Range(0, Veggies.Count)];
-              Vector3 throwX = new Vector3(Random.Range(throwXMin, throwXMax), 0, 0);
-              Instantiate(veg, throwX, )
-          }
-           */
-
-        for (int i = 0; i < veggieAmount; i++)
-        {
-            Vector3 throwX = new Vector3(Random.Range(throwXMin, throwXMax), 0, 0);
-            veggieRoster[i] = Veggies[Random.Range(0, Veggies.Count)];
-            Instantiate(veggieRoster[i], throwX, Quaternion.identity);
-
-            Debug.Log("Together Spawned");
-        }
-            
-        
-        yield return new WaitForSeconds(largeWaveDelay);
-        
-        StartCoroutine(SpawnVeggies());
-    }
 }
