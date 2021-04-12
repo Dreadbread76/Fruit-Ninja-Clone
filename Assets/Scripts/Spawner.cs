@@ -59,7 +59,7 @@ public class Spawner : MonoBehaviour
         StartCoroutine(Wave(waveType));
         if (waveType == 0)
         {
-            waveTypeText.text = "Steggered";
+            waveTypeText.text = "Staggered";
         }
         else
         {
@@ -77,7 +77,7 @@ public class Spawner : MonoBehaviour
 
         while(veggieCount <= veggieAmount)
         {
-            Vector3 throwX = new Vector3(Random.Range(throwXMin, throwXMax), 0 , 0);
+            Vector3 throwX = new Vector3(Random.Range(throwXMin, throwXMax), Random.Range(throwYMin,throwYMax), 0);
             GameObject currentVeggie = Veggies[Random.Range(0,Veggies.Count)];
 
            

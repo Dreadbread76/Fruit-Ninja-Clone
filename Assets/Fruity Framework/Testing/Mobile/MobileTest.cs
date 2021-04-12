@@ -28,13 +28,18 @@ public class MobileTest : MonoBehaviour
         }
         if (testSwipe)
         {
-#if (UNITY_ANDROID || UNITY_IOS) && UUNITY_EDITOR
+#if (UNITY_ANDROID || UNITY_IOS) && UNITY_EDITOR
 //IOS AND ANDROID HERE
             
 #else
             // Touch start emulation
             if (Input.GetMouseButtonDown(0))
             {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+                {
+
+                }
 
             }
             //Touch update simulation

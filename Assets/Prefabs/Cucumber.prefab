@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3656726285665584792}
   - component: {fileID: -5556849604880389819}
   - component: {fileID: 4657820045714050701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cucumber
-  m_TagString: Untagged
+  m_TagString: Vegetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,3 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded4b008829771845a199e9cda284dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwForceMin: 15
+  throwForceMax: 20

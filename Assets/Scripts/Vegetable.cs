@@ -5,10 +5,16 @@ using UnityEngine;
 public class Vegetable : MonoBehaviour
 {
     Rigidbody rigi;
-    public float throwForce;
-    public void OnAwake()
+    public float throwForceMin;
+    public float throwForceMax;
+
+    public void OnEnable()
     {
+
+        Vector3 launchVector = new Vector3(0,Random.Range(throwForceMin,throwForceMax), 0);
         rigi = GetComponent<Rigidbody>();
-        rigi.AddForce(0, throwForce, 0, ForceMode.Impulse);
+        rigi.AddForce(launchVector, ForceMode.Impulse );
+
     }
+
 }
