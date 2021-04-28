@@ -13,8 +13,15 @@ public class Vegetable : MonoBehaviour
 
         Vector3 launchVector = new Vector3(0,Random.Range(throwForceMin,throwForceMax), 0);
         rigi = GetComponent<Rigidbody>();
-        rigi.AddForce(launchVector, ForceMode.Impulse );
+        rigi.AddForce(launchVector, ForceMode.Impulse);
 
+    }
+    public void OnTriggerEnter(Collider collider)
+    {
+        if(collider.gameObject.CompareTag("Death Barrier"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }
