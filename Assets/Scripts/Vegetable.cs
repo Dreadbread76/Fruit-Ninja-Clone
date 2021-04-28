@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fruit.Scoring;
+
 
 public class Vegetable : MonoBehaviour
 {
     Rigidbody rigi;
     public float throwForceMin;
     public float throwForceMax;
+    
 
     public void OnEnable()
     {
@@ -16,5 +19,18 @@ public class Vegetable : MonoBehaviour
         rigi.AddForce(launchVector, ForceMode.Impulse );
 
     }
-
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Slicer") && Slicer.slicing == true)
+        {
+            Scoring.currentScore++;
+            
+            Destroy(this);
+        }
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            Destroy(this);
+        }
+    }
+  
 }

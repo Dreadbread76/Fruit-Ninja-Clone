@@ -12,9 +12,13 @@ public class MobileTest : MonoBehaviour
     private bool testJoystick = false;
     [SerializeField]
     private bool testSwipe = false;
+   
+    
+   
     // Start is called before the first frame update
     void Start()
     {
+       
         MobileInput.Initialise();
     }
 
@@ -35,17 +39,14 @@ public class MobileTest : MonoBehaviour
             // Touch start emulation
             if (Input.GetMouseButtonDown(0))
             {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
-                {
-
-                }
+               
+             
 
             }
             //Touch update simulation
             if (Input.GetMouseButton(0))
             {
-
+              
             }
             // Touch end simulation
             if (Input.GetMouseButtonUp(0))

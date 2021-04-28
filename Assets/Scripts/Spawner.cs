@@ -44,6 +44,12 @@ public class Spawner : MonoBehaviour
         {
             waveCountText.text = "Wave: " + currentWave + " (Final)";
         }
+        else if(currentWave > endWave)
+        {
+            currentWave = 0;
+            StartButton.SetActive(true);
+
+        }
         else
         {
             waveCountText.text = "Wave: " + currentWave;
