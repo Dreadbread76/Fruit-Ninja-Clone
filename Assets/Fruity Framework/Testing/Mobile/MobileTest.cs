@@ -12,8 +12,10 @@ public class MobileTest : MonoBehaviour
     private bool testJoystick = false;
     [SerializeField]
     private bool testSwipe = false;
+
    
-    
+
+    public Slicer slice;
    
     // Start is called before the first frame update
     void Start()
@@ -34,19 +36,23 @@ public class MobileTest : MonoBehaviour
         {
 #if (UNITY_ANDROID || UNITY_IOS) && UNITY_EDITOR
 //IOS AND ANDROID HERE
+
+           
+
             
 #else
             // Touch start emulation
             if (Input.GetMouseButtonDown(0))
             {
-               
-             
+                
+
+
 
             }
             //Touch update simulation
             if (Input.GetMouseButton(0))
             {
-              
+                slice.DestroyVeg();
             }
             // Touch end simulation
             if (Input.GetMouseButtonUp(0))
@@ -57,6 +63,9 @@ public class MobileTest : MonoBehaviour
             Vector2 touchPos = Input.mousePosition;
 #endif
         }
+
+
+        
 
     }
 }

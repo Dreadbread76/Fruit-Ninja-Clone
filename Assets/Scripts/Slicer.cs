@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fruit.Scoring;
 
 public class Slicer : MonoBehaviour
 {
-    Rigidbody rigi;
-    public static bool slicing;
-
-    void Start()
+  
+    
+    public Camera cam;
+    public Vegetable currentVeg;
+    
+   
+    public void DestroyVeg()
     {
-        rigi = GetComponent<Rigidbody>();
-    }
-    private void Update()
-    {
-        rigi.position = Input.mousePosition;
+        RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log("Hit Veggie");
+            GameObject currentObj = hit.transform.gameObject;
+            currentVeg = currentObj.GetComponent<Vegetable>();
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            slicing = true;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            slicing = false;
+            if(currentVeg != null)
+            {
+                Scoring.currentScore++;
+                Destroy(currentObj);
+            }
+
         }
     }
 }

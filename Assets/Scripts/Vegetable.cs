@@ -21,15 +21,10 @@ public class Vegetable : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Slicer") && Slicer.slicing == true)
-        {
-            Scoring.currentScore++;
-            
-            Destroy(this);
-        }
+       
         if (collision.gameObject.CompareTag("Death"))
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
   
