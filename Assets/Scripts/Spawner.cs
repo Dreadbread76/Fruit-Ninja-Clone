@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Spawner : MonoBehaviour
 {
@@ -26,8 +28,19 @@ public class Spawner : MonoBehaviour
     public Text waveCountText;
     public Text waveTypeText;
     public GameObject StartButton;
+    public GameObject RestartButton;
 
 
+    [Header("Sound")]
+    public AudioMixer audioMixer;
+    public AudioSource musicSource;
+    public AudioSource veggieSource;
+
+    private void Start()
+    {
+        StartButton.gameObject.SetActive(true);
+        RestartButton.gameObject.SetActive(false);
+    }
 
     //Start Wave 1 on button press
     public void StartWaves()
@@ -38,6 +51,18 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnVeggies());
         
     }
+    public void RestartGame()
+    {
+       
+        // Get the current scene and reload
+        Scene currentScene = SceneManager.GetActiveScene();
+        {
+            Time.timeScale = 1;
+             SceneManager.LoadScene(currentScene.name);
+        }
+
+
+    }
     public void Update()
     {
         if (currentWave == endWave)
@@ -47,7 +72,7 @@ public class Spawner : MonoBehaviour
         else if(currentWave > endWave)
         {
             currentWave = 0;
-            StartButton.SetActive(true);
+            RestartButton.SetActive(true);
 
         }
         else

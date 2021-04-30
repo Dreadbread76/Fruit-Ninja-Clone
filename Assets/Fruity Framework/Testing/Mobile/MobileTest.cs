@@ -53,7 +53,9 @@ public class MobileTest : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 slice.DestroyVeg();
+                
             }
+
             // Touch end simulation
             if (Input.GetMouseButtonUp(0))
             {

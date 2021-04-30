@@ -9,7 +9,7 @@ public class Slicer : MonoBehaviour
     
     public Camera cam;
     public Vegetable currentVeg;
-    
+    public Spawner spawner;
    
     public void DestroyVeg()
     {
@@ -23,7 +23,9 @@ public class Slicer : MonoBehaviour
 
             if(currentVeg != null)
             {
+                Debug.Log("hit");
                 Scoring.currentScore++;
+                spawner.veggieSource.Play();
                 Destroy(currentObj);
             }
 
