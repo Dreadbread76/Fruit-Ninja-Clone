@@ -7,6 +7,7 @@ using UnityEngine.Audio;
 
 public class Spawner : MonoBehaviour
 {
+    #region Variables
     public List<GameObject> Veggies = new List<GameObject>();
 
     [Header("Veggie Controls")]
@@ -35,13 +36,15 @@ public class Spawner : MonoBehaviour
     public AudioMixer audioMixer;
     public AudioSource musicSource;
     public AudioSource veggieSource;
-
+    #endregion
+    #region Start
     private void Start()
     {
         StartButton.gameObject.SetActive(true);
         RestartButton.gameObject.SetActive(false);
     }
-
+    #endregion
+    #region Waves Starting
     //Start Wave 1 on button press
     public void StartWaves()
     {
@@ -51,37 +54,35 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnVeggies());
         
     }
-    public void RestartGame()
-    {
-       
-        // Get the current scene and reload
-        Scene currentScene = SceneManager.GetActiveScene();
-        {
-            Time.timeScale = 1;
-             SceneManager.LoadScene(currentScene.name);
-        }
+    #endregion
+    #region Update
 
-
-    }
     public void Update()
     {
+        // Display to the player it is the final wave when on the final wave
         if (currentWave == endWave)
         {
             waveCountText.text = "Wave: " + currentWave + " (Final)";
         }
+
+        // Reset game when final wave is passed
         else if(currentWave > endWave)
         {
             currentWave = 0;
             RestartButton.SetActive(true);
 
         }
+        // Normal wave display
         else
         {
             waveCountText.text = "Wave: " + currentWave;
         }
     }
+    #endregion
+    #region Wave Type Setting
     IEnumerator SpawnVeggies()
     {
+        //Set the wave type to either staggered spawning or spawn together
         Debug.Log("Ready to spawn");
         currentWave++;
         veggieCount = 0;
@@ -100,20 +101,28 @@ public class Spawner : MonoBehaviour
         yield return null;
         
     }
+    #endregion
+    #region Wave Spawning
     IEnumerator Wave(int waveType)
     {
         Debug.Log("Wave Started");
        
+        //Randomise amount of veggies in wave
         veggieAmount = Random.Range(veggieAmountMin, veggieAmountMax);
 
+        // end wave when all veggies are spawned
         while(veggieCount <= veggieAmount)
         {
+            // Spawn on different places along the horizontal axis
             Vector3 throwX = new Vector3(Random.Range(throwXMin, throwXMax), Random.Range(throwYMin,throwYMax), 0);
+
+            //Randomise Veggie types
             GameObject currentVeggie = Veggies[Random.Range(0,Veggies.Count)];
 
-           
+            // Spawn the veggie
             Instantiate(currentVeggie, throwX, Quaternion.identity);
 
+            //Delay the next veggie spawn if wave is staggered
             if(waveType == 0)
             {
                 yield return new WaitForSeconds(spawnDelay);
@@ -122,13 +131,26 @@ public class Spawner : MonoBehaviour
             
             veggieCount++;
         }
-
+        // Delay between next wave
         yield return new WaitForSeconds(smallWaveDelay);
         
+        // Next Wave
         StartCoroutine(SpawnVeggies());
         
 
     }
-    
+    #endregion
+    #region Restart Game
+    // Get the current scene and reload
+    public void RestartGame()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(currentScene.name);
+        }
 
+
+    }
+    #endregion
 }

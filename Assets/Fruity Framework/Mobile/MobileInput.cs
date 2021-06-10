@@ -7,15 +7,20 @@ namespace Fruit.Mobile
 {
     public class MobileInput : MonoBehaviour
     {
+        #region Variables
         //Has the mobile input system been initialised
         public static bool Initialised => instance != null;
 
         //Singleton reference instance
         private static MobileInput instance = null;
-
+        #endregion
+        #region Initialisation
         /// <summary>
         /// If the system isn't already setup, this will instantiate the mobile input prefab and assign the static reference.
         /// </summary>
+        /// 
+
+            
         public static void Initialise()
         {
             //If the mobile input is already initialised, throw an exception to tell the user they dun goofed.
@@ -33,6 +38,8 @@ namespace Fruit.Mobile
             DontDestroyOnLoad(instance.gameObject);
             
         }
+        #endregion
+        #region Joystick
         [SerializeField]
         private JoystickInput joystickInput;
 
@@ -68,10 +75,15 @@ namespace Fruit.Mobile
             }
 
         }
-       
+        #endregion
+        #region Swipe
 
         [SerializeField] private SwipeInput swipeInput;
-
+        /// <summary>
+        /// Returns whether swiping is enabled
+        /// </summary>
+        /// <param name="_index"></param>
+        /// <returns></returns>
         public static SwipeInput.Swipe GetSwipe(int _index)
         {
             if (!Initialised)
@@ -85,6 +97,13 @@ namespace Fruit.Mobile
 
             return instance.swipeInput.GetSwipe(_index);
         }
+        #endregion
+        #region Flick
+        /// <summary>
+        /// Returns whether flicking is enabled
+        /// </summary>
+        /// <param name="_index"></param>
+        /// <returns></returns>
         public static void GetFlickData(out float _flickPower, out Vector2 _flickDirection)
         {
             if (!Initialised)
@@ -99,7 +118,7 @@ namespace Fruit.Mobile
             _flickDirection = instance.swipeInput.Flick;
         }
 
-        
+        #endregion
 
     }
 }
